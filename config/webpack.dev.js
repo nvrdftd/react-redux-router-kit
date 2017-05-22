@@ -7,20 +7,22 @@ module.exports = {
     main: ['react-hot-loader/patch',
            'webpack-dev-server/client?http://localhost:8080',
            'webpack/hot/only-dev-server',
-           './src/index.js'
+           '../src/index.js'
     ]
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    filename: '[name].js'
   },
   devtool: 'inline-source-map',
   devServer: {
     hot: true,
     compress: true,
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
-  }
+    contentBase: path.resolve(__dirname, '../dist'),
+    publicPath: ASSET_PATH
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
+  ]
 }

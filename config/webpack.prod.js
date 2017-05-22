@@ -1,18 +1,19 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack');
-const ASSET_PATH = process.env.ASSET_PATH || '/'
 
 module.exports = {
+  entry: {
+    main: '../src/index.js'
+  },
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: ASSET_PATH
   },
   devtool: 'cheap-source-map',
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
-    })
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'production'
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
   ]
 }

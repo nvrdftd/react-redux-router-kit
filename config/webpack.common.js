@@ -1,11 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const ASSET_PATH = process.env.ASSET_PATH || '/'
 
 module.exports = {
-  entry: {
-    vendor: ['react', 'react-dom', 'react-redux'],
-    main: []
+  context: __dirname,
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: ASSET_PATH
   },
   module: {
     rules: [
@@ -17,10 +18,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development'
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function(module) {
+        return module.context && module.context.indexOf('node_modules') !== -1
+      }
+    })
   ]
 }
