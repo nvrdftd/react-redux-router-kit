@@ -3,17 +3,16 @@ import { REQUEST_GREETINGS, RECEIVE_GREETINGS } from './actionTypes'
 
 export const requestGreetings = () => ({
   type: REQUEST_GREETINGS,
-  greetings
 })
 
-export const receiveGreetings = (greetings) => ({
-  type: REQUEST_GREETINGS,
-  greetings
+export const receiveGreetings = (msg) => ({
+  type: RECEIVE_GREETINGS,
+  msg
 })
 
 
-export const fetchGreetings = () => dispatch => {
+export const fetchGreetings = () => (dispatch) => {
   dispatch(requestGreetings())
   return dummyApi()
-    .then(res => dispatch(receiveGreetings(res)))
+    .then(res => dispatch(receiveGreetings(res.msg)))
 }

@@ -2,7 +2,7 @@ import { REQUEST_GREETINGS, RECEIVE_GREETINGS } from '../actions/actionTypes';
 
 export default (state = {
   isFetching: false,
-  greetings: ''
+  msg: ''
 }, action) => {
   switch (action.type) {
     case REQUEST_GREETINGS:
@@ -14,7 +14,7 @@ export default (state = {
       return {
         ...state,
         isFetching: false,
-        greetings: action.greetings
+        msg: action.msg
       }
     default:
       return state

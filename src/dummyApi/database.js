@@ -1,3 +1,3 @@
 export default {
-  greetings: 'Congratulations! You made it.'
+  msg: 'Congratulations! You made it.'
 }
